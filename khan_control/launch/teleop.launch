@@ -3,6 +3,7 @@
 
   <arg name="joy_dev" default="/dev/input/js0" />
   <arg name="joystick" default="true" />
+  <arg name="config_filepath" default="$(find khan_control)/config/teleop.yaml" />
 
   <group ns="joy_teleop">
 
@@ -12,7 +13,9 @@
       <param name="dev" value="$(arg joy_dev)" />
     </node>
 
-    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy"/>
+    <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node">
+      <rosparam command="load" file="$(arg config_filepath)" />
+    </node>
   </group>
 
 </launch>
